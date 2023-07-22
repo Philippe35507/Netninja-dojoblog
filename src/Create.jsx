@@ -8,7 +8,14 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const blog = { title, body, author };
-    console.log(blog);
+
+    fetch("http://localhost:8000/blogs", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(blog),
+    }).then(() => {
+      console.log("new blog added");
+    });
   };
 
   return (
@@ -22,7 +29,7 @@ const Create = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <label>Blog body:</label>{" "}
+        <label>Blog body:</label>
         <textarea
           required
           value={body}
